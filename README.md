@@ -37,7 +37,7 @@ To use the Blockgum PHP library, follow these steps:
 Creates a new blockchain address for a user identified by their unique ID.
 
 ```php
-$uid = 'user123';
+$uid = '23236';
 $response = $blockgum->createAddress($uid);
 ```
 
@@ -48,7 +48,7 @@ $response = $blockgum->createAddress($uid);
 Retrieves blockchain data associated with a user identified by their unique ID.
 
 ```php
-$uid = 'user123';
+$uid = '23236';
 $response = $blockgum->searchByUid($uid);
 ```
 
