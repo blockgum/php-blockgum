@@ -277,4 +277,24 @@ The Blockgum PHP library also includes various private methods used internally f
 
 ## Error Handling
 
-The library provides basic error handling by returning an associative array with a "status" and "error" message when an error occurs. Be sure to check the "
+The Blockgum PHP library includes basic error handling to help you manage and troubleshoot issues that may arise during API interactions. When an error occurs, the library returns an associative array with the following structure:
+
+- `status` (integer): Indicates the status of the operation. A value of `0` typically indicates an error.
+- `error` (string): Provides a human-readable error message describing the issue.
+- `errorCode` (string, optional): Specifies an error code to further categorize the error.
+
+Here's an example of how to handle errors using the returned array:
+
+```php
+$response = $blockgum->someMethod();
+
+if ($response['status'] === 0) {
+    // An error occurred
+    $errorCode = $response['errorCode'] ?? null;
+    $errorMessage = $response['error'];
+    
+    // Handle the error based on the errorCode or errorMessage
+    // You can log the error, display a user-friendly message, or take appropriate action.
+} else {
+    // The operation was successful, process the response data as needed.
+}
