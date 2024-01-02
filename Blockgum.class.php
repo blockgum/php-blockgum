@@ -410,7 +410,7 @@ class Blockgum
         return rtrim($base64Url, '=');
     }
 
-    private function logger($name,$log);{
+    private function logger($name,$log){
         //do some logging
     }
     private function format_num($num, $decimals = 8) {
