@@ -336,33 +336,33 @@ class Blockgum
 
     }
 
-    private function customget($method_url)
-    {
-        $curl = curl_init();
+    private function customget($method_url) {
+    $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->api_url/$this->chain/" . $method_url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => $this->getHeader([]),
-        ));
-        $response = curl_exec($curl);
-        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        curl_close($curl);
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "$this->api_url/$this->chain/" . $method_url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => $this->getHeader([]),
+    ));
 
-        if (isset($httpcode['code']) && $httpcode['code'] !== 200) {
-            $this->logger('blockgum_', $httpcode);
-            $response = json_encode(['status' => 0, 'data' => [], 'error' => 'Could not connect with Server or other issues']);
-        }
-            return $response;
+    $response = curl_exec($curl);
+    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
+
+    if ($httpcode !== 200) {
+        $this->logger('blockgum_', ['httpcode' => $httpcode]);
+        $response = json_encode(['status' => 0, 'data' => [], 'error' => 'Could not connect with Server or other issues']);
     }
+    return $response;
+}
 
     private function custompost($method_url, $post_array)
     {
