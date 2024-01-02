@@ -294,7 +294,7 @@ class Blockgum
         return $this->respHandle($resp);
     }
     public function amount_decode($val,$decimals=null){
-        $amount=format_num($val,0);
+        $amount=$this->format_num($val,0);
         $decimals=$decimals?:$this->decimals;
 
         return bcdiv($amount,bcpow(10,$decimals,0),8);
@@ -310,7 +310,7 @@ class Blockgum
         }
         $array_resp = json_decode($resp, true);
         if((array_key_exists('status',$array_resp) && array_key_exists('errorCode',$array_resp) ) && $array_resp['status']==0  && $array_resp['errorCode']){
-            clog('blockgum',$array_resp);
+            $this->logger('blockgum',$array_resp);
             return  ['status' => 0, 'errorCode' => $array_resp['errorCode'],'data' => [], 'error' => 'Currently service is down , Please check logs'];
         }
         return $array_resp;
@@ -354,13 +354,12 @@ class Blockgum
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => $this->getHeader([]),
         ));
-        
-        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $response = curl_exec($curl);
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if (isset($httpcode['code']) && $httpcode['code'] !== 200) {
-            clog('blockgum_', $httpcode);
+            $this->logger('blockgum_', $httpcode);
             $response = json_encode(['status' => 0, 'data' => [], 'error' => 'Could not connect with Server or other issues']);
         }
             return $response;
@@ -412,5 +411,10 @@ class Blockgum
         return rtrim($base64Url, '=');
     }
 
-
+    private function logger($name,$log);{
+        //do some logging
+    }
+    private function format_num($num, $decimals = 8) {
+        return number_format($num, $decimals, '.', '');
+    }
 }
