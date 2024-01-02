@@ -1,5 +1,4 @@
 <?php
-<?php
 /**
  * Blockgum PHP Library
  *
@@ -7,7 +6,7 @@
  *
  * @copyright Blockgum.com
  * @license   Commercial License
- *
+ * Version : 2.0
  */
 class Blockgum
 {
