@@ -145,24 +145,24 @@ $response = $blockgum->getAddressList($page);
 
 ### Watching Tokens
 
-#### `watchToken($contact)`
+#### `watchToken($contract)`
 
-Watches a token based on the contact information.
+Watches a token based on the contract information.
 
 ```php
-$contact = 'token_contact';
-$response = $blockgum->watchToken($contact);
+$contract = 'token_contract';
+$response = $blockgum->watchToken($contract);
 ```
 
 ### Deleting Tokens
 
-#### `deleteToken($contact)`
+#### `deleteToken($contract)`
 
-Deletes a token based on the contact information.
+Deletes a token based on the contract information.
 
 ```php
-$contact = 'token_contact';
-$response = $blockgum->deleteToken($contact);
+$contract = 'token_contract';
+$response = $blockgum->deleteToken($contract);
 ```
 
 ### Retrieving Statistics
